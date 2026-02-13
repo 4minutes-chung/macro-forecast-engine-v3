@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\title{Macro Risk Forecasting Package: Plain-Language Report}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{What this folder is}
+This folder contains a complete, runnable macroeconomic forecasting package.
+It is designed to generate 20 years of quarterly U.S.\ macro projections that can feed into mortgage
+credit risk models (PD/LGD). It is \emph{not} the PD model itself; it produces the macro inputs that PD models use.
+
+\section{What you can do with it}
+\begin{itemize}
+  \item Refresh U.S.\ macro data from public sources (FRED).
+  \item Fit a short-term forecasting model that captures near-term dynamics.
+  \item Extend forecasts to 20 years using explicit long-run assumptions.
+  \item Produce multiple scenarios (baseline, mild adverse, severe adverse, demographic low growth).
+  \item Export a small, PD-ready CSV with units and transformation labels.
+\end{itemize}
+
+\section{Folder map (human-friendly)}
+\begin{itemize}
+  \item \texttt{scripts/}: runnable programs that fetch data and generate forecasts.
+  \item \texttt{data/}: the cleaned quarterly dataset used by the models.
+  \item \texttt{outputs/macro\_engine/}: all generated forecast outputs.
+  \item \texttt{macro\_engine\_config.json}: configuration for model horizons, variables, and scenarios.
+  \item \texttt{macro\_engine\_schema.md}: column definitions and units.
+  \item \texttt{README\_MACRO\_ENGINE.md}: run instructions + auto-synced schema.
+\end{itemize}
+
+\section{Detailed workflow}
+
+\subsection*{1. Data}
+\begin{itemize}
+  \item Pull 28 public macro series (labor, prices, activity, housing, credit, household balance sheet, demographics) via \texttt{fetch\_macro\_panel\_fred.py}.
+  \item Aggregate monthly series to quarterly averages; keep quarterly series as-is; compute YoY changes for growth/inflation series; and drop rows with missing variables.
+  \item Save both the raw and modeled panels plus metadata:
+        \texttt{data/macro\_panel\_quarterly\_\{raw,model\}.csv} and \texttt{data/macro\_panel\_metadata.json}.
+\end{itemize}
+
+\subsection*{2. Short horizon (quarters 1--8)}
+\begin{itemize}
+  \item Fit a VAR on a stable 12-variable benchmark subset (unemployment, headline/core CPI, real GDP, HPI, housing starts, mortgage rates, 10y UST, HY spread, fed funds, delinquency, working-age population growth) for diagnostics and impulse responses.
+  \item Fit a Minnesota-prior BVAR on the full 28-variable panel with hyperparameters
+        $(\lambda_1,\lambda_2,\lambda_3,\lambda_4)=(0.2,0.5,1.0,5.0)$.
+        Short-horizon output defaults to this BVAR path unless configured otherwise.
+  \item Simulate 600 draws from each model to capture 5/50/95 quantiles and write them to
+        \texttt{macro\_forecast\_short\_horizon\_intervals.csv}.
+  \item Export IRFs for mortgage-rate, HPI, and unemployment shocks for interpretation via
+        \texttt{macro\_impulse\_responses.csv}.
+\end{itemize}
+
+\subsection*{3. Medium horizon (quarters 9--20)}
+\begin{itemize}
+  \item Compute an anchor vector from configuration assumptions:
+        NAIRU (4.2\%), inflation target (2.1\%), neutral real rate (0.8\%),
+        term premium (1.2\%), mortgage spread (1.7\%), productivity plus working-age growth,
+        housing supply drag (0.5 pp), and demographic growth (0.6\% population).
+  \item Bridge the model output toward the anchors linearly between quarters 9--20, then mean-revert beyond quarter 20 to avoid drift.
+  \item Save anchor definitions and assumptions in \texttt{macro\_anchor\_assumptions.json} for auditability.
+\end{itemize}
+
+\subsection*{4. Long horizon (quarters 21--80)}
+\begin{itemize}
+  \item Apply scenario envelopes on top of the anchor path:
+    \begin{itemize}
+      \item \textbf{Baseline}: the anchor-adjusted path.
+      \item \textbf{Mild Adverse}: +2.5 pp unemployment, $-3.0$ pp HPI growth, +1.0 pp mortgage rate,
+            $-1.5$ pp GDP growth, +2.0 pp HY spread, with a small persistent HPI drag.
+      \item \textbf{Severe Adverse}: +5.5 pp unemployment, $-7.0$ pp HPI growth, +2.0 pp mortgage rate,
+            $-3.0$ pp GDP growth, +4.0 pp HY spread, +1.5 pp delinquency, with deeper HPI drag.
+      \item \textbf{Demographic Low Growth}: permanent anchor shifts lowering population/workforce growth, GDP growth, and HPI growth.
+    \end{itemize}
+  \item Each scenario blends triangular shocks (start, peak, end quarters) plus persistent anchor shifts to deliver plausible macro evolutions through year 20.
+\end{itemize}
+
+\subsection*{5. Final outputs}
+The ``big CSV'' \texttt{macro\_forecast\_paths.csv} lists every scenario--quarter--variable triple.
+The PD subset CSV/JSON provides a smaller set of key variables with unit and transformation metadata for ingestion.
+
+\section{How others use it}
+\begin{itemize}
+  \item Share the \texttt{outputs/macro\_engine/} directory plus \texttt{macro\_engine\_schema.md}.
+  \item Run \texttt{run\_all.sh} (or the underlying scripts) inside the folder to regenerate the panel and forecasts.
+  \item Drop the PD subset CSV into IFRS/Basel pipelines; the schema indicates which fields are YoY (\%) versus levels.
+\end{itemize}
+
+\section{What gets produced}
+\begin{itemize}
+  \item \texttt{outputs/macro\_engine/macro\_forecast\_paths.csv}:
+        the full 20-year forecast for every variable and scenario.
+  \item \texttt{outputs/macro\_engine/macro\_forecast\_short\_horizon\_intervals.csv}:
+        near-term uncertainty bands (5/50/95 percentiles).
+  \item \texttt{outputs/macro\_engine/macro\_model\_diagnostics.json}:
+        model settings and stability checks.
+  \item \texttt{outputs/macro\_engine/macro\_anchor\_assumptions.json}:
+        long-run anchors used to guide the forecast.
+  \item \texttt{outputs/macro\_engine/macro\_impulse\_responses.csv}:
+        impulse responses used for interpretation.
+  \item \texttt{outputs/macro\_engine/pd\_macro\_subset\_sample.csv}:
+        a small PD-ready file with key macro variables.
+  \item \texttt{outputs/macro\_engine/pd\_macro\_subset\_sample.json}:
+        units and transformations for the PD subset.
+\end{itemize}
+
+\section{How to run everything (one command)}
+Run the entire pipeline from the top folder:
+\begin{verbatim}
+./run_all.sh
+\end{verbatim}
+
+This script does three things:
+\begin{enumerate}
+  \item Fetches and rebuilds the quarterly data panel.
+  \item Runs the forecast engine with the configured scenarios.
+  \item Exports the PD-ready subset and metadata.
+\end{enumerate}
+
+\section{What the outputs mean (plain language)}
+\begin{itemize}
+  \item \textbf{Baseline} is the ``most likely'' path assuming no major shock.
+  \item \textbf{Mild Adverse} is a moderate recession-style shock.
+  \item \textbf{Severe Adverse} is a deep recession with higher unemployment and weaker housing.
+  \item \textbf{Demographic Low Growth} lowers long-run growth assumptions to reflect structural drag.
+\end{itemize}
+
+Each row in \texttt{macro\_forecast\_paths.csv} corresponds to one future quarter for one scenario,
+containing values for each macro variable (e.g., unemployment, inflation, house-price growth).
+
+\section{How to share this with a PD team}
+\begin{enumerate}
+  \item Share the full folder, or at minimum \texttt{outputs/macro\_engine/}.
+  \item Point them to \texttt{pd\_macro\_subset\_sample.csv} and its JSON metadata.
+  \item If they need the full set of variables, use \texttt{macro\_forecast\_paths.csv}.
+\end{enumerate}
+
+\section{Known limitations (transparent)}
+\begin{itemize}
+  \item This package forecasts macro variables only; it does not build or calibrate PD models.
+  \item Long-run outcomes are anchored on explicit assumptions; these can be edited in \texttt{macro\_engine\_config.json}.
+  \item Data is pulled from public sources (FRED); revisions can change results slightly over time.
+\end{itemize}
+
+\end{document}

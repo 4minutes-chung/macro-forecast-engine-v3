@@ -1,0 +1,57 @@
+{
+  "source_file": "outputs/macro_engine/macro_forecast_paths.csv",
+  "fields": [
+    "unemployment_rate",
+    "hpi_growth_yoy",
+    "mortgage30_rate",
+    "ust10_rate",
+    "headline_cpi_yoy",
+    "real_gdp_growth_yoy",
+    "high_yield_spread",
+    "consumer_delinquency_rate",
+    "housing_starts_yoy",
+    "retail_sales_yoy"
+  ],
+  "field_metadata": {
+    "unemployment_rate": {
+      "units": "percent",
+      "transform": "level"
+    },
+    "hpi_growth_yoy": {
+      "units": "percent",
+      "transform": "yoy"
+    },
+    "mortgage30_rate": {
+      "units": "percent",
+      "transform": "level"
+    },
+    "ust10_rate": {
+      "units": "percent",
+      "transform": "level"
+    },
+    "headline_cpi_yoy": {
+      "units": "percent",
+      "transform": "yoy"
+    },
+    "real_gdp_growth_yoy": {
+      "units": "percent",
+      "transform": "yoy"
+    },
+    "high_yield_spread": {
+      "units": "percent",
+      "transform": "level"
+    },
+    "consumer_delinquency_rate": {
+      "units": "percent",
+      "transform": "level"
+    },
+    "housing_starts_yoy": {
+      "units": "percent",
+      "transform": "yoy"
+    },
+    "retail_sales_yoy": {
+      "units": "percent",
+      "transform": "yoy"
+    }
+  }
+}

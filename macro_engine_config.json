@@ -1,0 +1,137 @@
+{
+  "inputs": {
+    "model_panel_csv": "data/macro_panel_quarterly_model.csv"
+  },
+  "horizons": {
+    "short_quarters": 8,
+    "medium_quarters": 20,
+    "long_start_quarter": 21,
+    "total_quarters": 80
+  },
+  "model": {
+    "variables": [
+      "unemployment_rate",
+      "labor_force_participation",
+      "payroll_growth_yoy",
+      "wage_growth_yoy",
+      "headline_cpi_yoy",
+      "core_cpi_yoy",
+      "pce_inflation_yoy",
+      "oer_inflation_yoy",
+      "medical_cpi_yoy",
+      "real_gdp_growth_yoy",
+      "industrial_production_yoy",
+      "consumer_sentiment",
+      "retail_sales_yoy",
+      "hpi_growth_yoy",
+      "housing_starts_yoy",
+      "building_permits_yoy",
+      "months_supply_homes",
+      "rent_inflation_yoy",
+      "mortgage30_rate",
+      "ust10_rate",
+      "high_yield_spread",
+      "prime_rate",
+      "fed_funds_rate",
+      "household_credit_growth_yoy",
+      "household_networth_growth_yoy",
+      "consumer_delinquency_rate",
+      "working_age_pop_growth_yoy",
+      "population_growth_yoy"
+    ],
+    "var_benchmark_variables": [
+      "unemployment_rate",
+      "headline_cpi_yoy",
+      "core_cpi_yoy",
+      "real_gdp_growth_yoy",
+      "hpi_growth_yoy",
+      "housing_starts_yoy",
+      "mortgage30_rate",
+      "ust10_rate",
+      "high_yield_spread",
+      "fed_funds_rate",
+      "consumer_delinquency_rate",
+      "working_age_pop_growth_yoy"
+    ],
+    "level_variable_flags": {
+      "unemployment_rate": true,
+      "labor_force_participation": true,
+      "consumer_sentiment": true,
+      "months_supply_homes": true,
+      "mortgage30_rate": true,
+      "ust10_rate": true,
+      "high_yield_spread": true,
+      "prime_rate": true,
+      "fed_funds_rate": true,
+      "consumer_delinquency_rate": true
+    },
+    "lag_candidates": [2, 3, 4, 5, 6],
+    "short_horizon_model": "BVAR",
+    "interval_simulations": 600,
+    "random_seed": 42,
+    "bvar_hyperparams": {
+      "lambda1": 0.2,
+      "lambda2": 0.5,
+      "lambda3": 1.0,
+      "lambda4": 5.0
+    }
+  },
+  "assumptions": {
+    "working_age_pop_growth_yoy": 0.4,
+    "population_growth_yoy": 0.6,
+    "labor_productivity_trend_yoy": 1.2,
+    "nairu": 4.2,
+    "inflation_target": 2.1,
+    "neutral_real_rate": 0.8,
+    "term_premium_10y": 1.2,
+    "mortgage_spread_30y": 1.7,
+    "hy_spread_anchor": 3.8,
+    "housing_supply_elasticity_drag": 0.5
+  },
+  "scenarios": {
+    "Mild_Adverse": {
+      "shock_profiles": {
+        "unemployment_rate": { "start_q": 21, "peak_q": 28, "end_q": 52, "peak_delta": 2.5 },
+        "hpi_growth_yoy": { "start_q": 21, "peak_q": 30, "end_q": 50, "peak_delta": -3.0 },
+        "mortgage30_rate": { "start_q": 21, "peak_q": 26, "end_q": 46, "peak_delta": 1.0 },
+        "real_gdp_growth_yoy": { "start_q": 21, "peak_q": 28, "end_q": 44, "peak_delta": -1.5 },
+        "high_yield_spread": { "start_q": 21, "peak_q": 27, "end_q": 45, "peak_delta": 2.0 }
+      },
+      "persistent_anchor_shift": {
+        "hpi_growth_yoy": -0.2
+      }
+    },
+    "Severe_Adverse": {
+      "shock_profiles": {
+        "unemployment_rate": { "start_q": 21, "peak_q": 32, "end_q": 64, "peak_delta": 5.5 },
+        "hpi_growth_yoy": { "start_q": 21, "peak_q": 33, "end_q": 64, "peak_delta": -7.0 },
+        "mortgage30_rate": { "start_q": 21, "peak_q": 27, "end_q": 52, "peak_delta": 2.0 },
+        "real_gdp_growth_yoy": { "start_q": 21, "peak_q": 30, "end_q": 56, "peak_delta": -3.0 },
+        "high_yield_spread": { "start_q": 21, "peak_q": 30, "end_q": 56, "peak_delta": 4.0 },
+        "consumer_delinquency_rate": { "start_q": 21, "peak_q": 32, "end_q": 60, "peak_delta": 1.5 }
+      },
+      "persistent_anchor_shift": {
+        "hpi_growth_yoy": -0.4,
+        "consumer_delinquency_rate": 0.2
+      }
+    },
+    "Demographic_LowGrowth": {
+      "shock_profiles": {},
+      "persistent_anchor_shift": {
+        "working_age_pop_growth_yoy": -0.3,
+        "population_growth_yoy": -0.2,
+        "real_gdp_growth_yoy": -0.6,
+        "hpi_growth_yoy": -0.5,
+        "retail_sales_yoy": -0.4
+      }
+    }
+  },
+  "outputs": {
+    "irf_horizon_quarters": 20,
+    "irf_shocks": {
+      "mortgage30_rate": 1.0,
+      "hpi_growth_yoy": -5.0,
+      "unemployment_rate": 2.0
+    }
+  }
+}

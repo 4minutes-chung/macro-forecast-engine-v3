@@ -1,0 +1,176 @@
+{
+  "series": [
+    {
+      "var": "unemployment_rate",
+      "fred_id": "UNRATE",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "labor_force_participation",
+      "fred_id": "CIVPART",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "payroll_growth_yoy",
+      "fred_id": "PAYEMS",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "wage_growth_yoy",
+      "fred_id": "CES3000000008",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "headline_cpi_yoy",
+      "fred_id": "CPIAUCSL",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "core_cpi_yoy",
+      "fred_id": "CPILFESL",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "pce_inflation_yoy",
+      "fred_id": "PCEPI",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "oer_inflation_yoy",
+      "fred_id": "CUSR0000SEHC",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "medical_cpi_yoy",
+      "fred_id": "CPIMEDSL",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "real_gdp_growth_yoy",
+      "fred_id": "GDPC1",
+      "aggregation": "last",
+      "transform": "yoy"
+    },
+    {
+      "var": "industrial_production_yoy",
+      "fred_id": "INDPRO",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "consumer_sentiment",
+      "fred_id": "UMCSENT",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "retail_sales_yoy",
+      "fred_id": "RSAFS",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "hpi_growth_yoy",
+      "fred_id": "USSTHPI",
+      "aggregation": "last",
+      "transform": "yoy"
+    },
+    {
+      "var": "housing_starts_yoy",
+      "fred_id": "HOUST",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "building_permits_yoy",
+      "fred_id": "PERMIT",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "months_supply_homes",
+      "fred_id": "MSACSR",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "rent_inflation_yoy",
+      "fred_id": "CUSR0000SEHA",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "mortgage30_rate",
+      "fred_id": "MORTGAGE30US",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "ust10_rate",
+      "fred_id": "GS10",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "high_yield_spread",
+      "fred_id": "BAMLH0A0HYM2",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "prime_rate",
+      "fred_id": "DPRIME",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "fed_funds_rate",
+      "fred_id": "FEDFUNDS",
+      "aggregation": "mean",
+      "transform": "level"
+    },
+    {
+      "var": "household_credit_growth_yoy",
+      "fred_id": "CMDEBT",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "household_networth_growth_yoy",
+      "fred_id": "BOGZ1FL192090005Q",
+      "aggregation": "last",
+      "transform": "yoy"
+    },
+    {
+      "var": "consumer_delinquency_rate",
+      "fred_id": "DRCCLACBS",
+      "aggregation": "last",
+      "transform": "level"
+    },
+    {
+      "var": "working_age_pop_growth_yoy",
+      "fred_id": "LFWA64TTUSM647S",
+      "aggregation": "mean",
+      "transform": "yoy"
+    },
+    {
+      "var": "population_growth_yoy",
+      "fred_id": "POPTHM",
+      "aggregation": "mean",
+      "transform": "yoy"
+    }
+  ],
+  "n_variables": 28,
+  "n_rows_model": 116,
+  "start_quarter": "1996-12-31",
+  "end_quarter": "2025-09-30"
+}
