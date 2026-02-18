@@ -1,5 +1,5 @@
 {
-  "contract_version": "v4.1",
+  "contract_version": "v3.freeze.1",
   "regime_id": "champion_b",
   "assumption_set": "base",
   "data_rows_used": 116,
@@ -47,7 +47,7 @@
   },
   "champion_map": {
     "path": "outputs/macro_engine/champion_map.json",
-    "hash": "bd9d93791ffe795a"
+    "hash": "4aa3194d81ccd8d5"
   },
   "generated_scenarios": [
     "Baseline",
