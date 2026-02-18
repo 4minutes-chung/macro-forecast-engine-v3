@@ -1,0 +1,293 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+\title{Macro Risk Engine V3: Technical Report and Freeze Record}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Executive summary}
+Within this project line, V3 is the first release with explicit forecast governance.
+It is designed to produce stable quarterly macro paths for PD input workflows,
+with explicit acceptance gates and reproducible artifacts.
+
+Current V3 status from the latest validation snapshot:
+\begin{itemize}[leftmargin=1.2em]
+  \item Release gate: \textbf{pass}
+  \item Promotion gate (challenger replacing incumbent): \textbf{fail}
+  \item Diagnostic-only mode: \textbf{false} (power requirements satisfied)
+\end{itemize}
+
+This means V3 is suitable to freeze as a production fallback baseline.
+
+\section{Scope and output contract}
+\subsection{Scope}
+The engine forecasts macro variables. It does not estimate PD/LGD models.
+
+\subsection{Primary PD handoff contract}
+Canonical handoff is a quarterly level-path file with:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{unemployment\_rate}
+  \item \texttt{ust10\_rate}
+  \item \texttt{hpi\_yoy} (mapped from \texttt{hpi\_growth\_yoy})
+\end{itemize}
+
+Convenience derived outputs (for quick checks) are included but non-blocking.
+
+\section{Data design and assumptions}
+\subsection{Source and frequency}
+The modeling panel is built from FRED-based series mappings and aggregated to quarterly frequency.
+
+\subsection{Modeling panel}
+The main training table is:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{data/macro\_panel\_quarterly\_model.csv}
+\end{itemize}
+with metadata in:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{data/macro\_panel\_metadata.json}
+\end{itemize}
+
+\subsection{Transform policy}
+Rates, spreads, sentiment, and delinquency series are treated in level-style form.
+Growth and inflation series are mainly YoY transforms.
+
+\section{Model architecture from scratch}
+\subsection{Horizon and regime architecture}
+Forecast horizon is 80 quarters. V3 evaluates explicit regime candidates:
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{Champion A (incumbent)}: Q1--Q12 short model, Q13--Q24 bridge, Q25--Q80 long-run/scenario
+  \item \textbf{Champion B (challenger)}: Q1--Q16 short model, Q17--Q28 bridge, Q29--Q80 long-run/scenario
+  \item \textbf{Single-stage ablation}: \texttt{single\_stage\_h12\_no\_bridge}
+\end{itemize}
+
+\subsection{Short-horizon model system}
+V3 does not force one model for every variable.
+Candidates include BVAR, AR, and RW. Selection is by variable and horizon bucket:
+\begin{itemize}[leftmargin=1.2em]
+  \item Bucket 1: Q1--Q4
+  \item Bucket 2: Q5--Q12
+\end{itemize}
+
+Champion tie-break order:
+\begin{enumerate}[leftmargin=1.4em]
+  \item Lowest mean CRPS
+  \item Coverage closeness to 0.90
+  \item Width-ratio closeness to 1.0
+\end{enumerate}
+
+Champion decisions are persisted in:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{outputs/macro\_engine/champion\_map.json}
+\end{itemize}
+
+\subsection{Bridge and long-run design}
+After short horizon, the system transitions by bridge dynamics and then long-run scenario behavior.
+Long-run values combine structural anchors and non-structural regime parameters.
+
+\textbf{Structural anchors (assumption sets low/base/high):}
+NAIRU, inflation target, neutral real rate, productivity trend, working-age growth,
+population growth, term premium.
+
+\textbf{Non-structural long-run parameters:}
+HY spread distribution behavior, mortgage spread, and housing supply drag.
+
+\subsection{Scenario layer}
+Scenarios generated in the forecast output include:
+\begin{itemize}[leftmargin=1.2em]
+  \item Baseline
+  \item Mild\_Adverse
+  \item Severe\_Adverse
+  \item Demographic\_LowGrowth
+\end{itemize}
+
+\section{Validation framework (V3 governance core)}
+\subsection{Contract and target set}
+Validation contract version in current artifact: \texttt{v3.freeze.1}.
+Primary gated target set is PD levels only:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{unemployment\_rate}
+  \item \texttt{ust10\_rate}
+  \item \texttt{hpi\_yoy}
+\end{itemize}
+across horizons h1..h12.
+
+\subsection{Power and invariants}
+\begin{itemize}[leftmargin=1.2em]
+  \item Required-cell power rule: minimum \texttt{n\_oos} \(\ge 40\)
+  \item Scenario timing and scenario ordering checks
+  \item Boundary smoothness checks at regime seams
+  \item Seeded reproducibility for simulation-based metrics
+\end{itemize}
+
+\subsection{Profiles and pass/fail usage}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{release}: production acceptance gate
+  \item \texttt{promotion}: challenger replacement gate
+  \item \texttt{operational}: reporting-only diagnostics
+\end{itemize}
+
+\subsection{Core metrics}
+\begin{itemize}[leftmargin=1.2em]
+  \item Relative RMSE vs RW (short horizon)
+  \item CRPS gain vs RW (medium horizon)
+  \item Coverage pass-rate (90\% interval in configured band)
+  \item Width-ratio guardrails (mean and per-variable)
+  \item Boundary Z metrics (median and max)
+\end{itemize}
+
+\section{Why V3 exists: issues found in earlier versions and fixes applied}
+The V3 build addressed concrete failure modes observed during earlier iterations:
+
+\small
+\begin{longtable}{@{}p{0.26\textwidth}p{0.31\textwidth}p{0.37\textwidth}@{}}
+\toprule
+\textbf{Earlier issue} & \textbf{Risk} & \textbf{V3 response} \\
+\midrule
+Lag-selection mismatch between production and backtest paths & OOS claims not representative of production behavior & Unified lag-parity logic and common validation path \\
+Scenario timing offset at start quarter & Scenario shocks applied one quarter off, distorting stress paths & Deterministic timing/order checks integrated in validation \\
+Small OOS sample and weak evidence quality & Performance claims unstable and easy to over-interpret & Hard power gate with minimum required-cell \texttt{n\_oos} \\
+Model drift from ad-hoc changes & No stable contract for release decisions & Explicit contract version, threshold profiles, and artifacts \\
+Coverage failures vs over-wide intervals tradeoff & Density quality could be gamed by width inflation & Combined coverage + sharpness gates with caps and calibration controls \\
+Boundary discontinuity spikes at regime seams & Artificial jumps contaminating forecast paths & Boundary continuity controls and Z-stat diagnostics \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Latest V3 evidence snapshot}
+Source: \texttt{outputs/macro\_engine/validation/validation\_summary.json}
+
+\subsection{Release gate (incumbent)}
+\begin{center}
+\begin{tabular}{p{0.46\textwidth}r}
+\toprule
+Metric & Value \\
+\midrule
+Minimum required-cell \texttt{n\_oos} & 44 \\
+Coverage90 pass-rate & 0.8611 \\
+Mean width ratio & 1.3069 \\
+Median rRMSE h1--2 & 0.9744 \\
+Median rRMSE h3--4 & 0.9208 \\
+Mean CRPS gain h5--12 vs RW & 15.13\% \\
+Boundary median Z / max Z & 0.0012 / 0.0350 \\
+Release decision & \textbf{PASS} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Promotion gate (challenger vs incumbent)}
+\begin{center}
+\begin{tabular}{p{0.52\textwidth}r}
+\toprule
+Metric & Value \\
+\midrule
+Challenger release pass & False \\
+Promotion subset min \texttt{n\_oos} (h9..12) & 40 \\
+CRPS gain h9..12 challenger vs incumbent & 1.64\% \\
+Short-horizon CRPS worsen h1..4 & 0.42\% \\
+Boundary comparator pass & True \\
+Promotion decision & \textbf{FAIL} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Interpretation: incumbent is suitable for freeze; challenger is not promoted.
+
+\section{PD-target champion map snapshot}
+From current \texttt{champion\_map.json}:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{unemployment\_rate}: BVAR in both buckets; Q5--Q12 calibration scale 1.205
+  \item \texttt{ust10\_rate}: AR in both buckets; Q5--Q12 calibration scale 1.55
+  \item \texttt{hpi\_growth\_yoy}: BVAR in both buckets; Q5--Q12 calibration scale 0.90
+\end{itemize}
+
+\section{Integrated scorecard and independent-review notes}
+\subsection{Historical transition note (V3.1 recovery to V3 freeze)}
+Earlier recovery-stage summaries recorded a period where coverage improved but width inflation still failed release checks.
+That transition work introduced tiered profiles, boundary continuity enforcement, and calibration controls.
+The frozen snapshot in this report reflects the post-recovery state where release now passes on the primary PD level targets.
+
+\subsection{Detailed promotion bottleneck from scorecard diagnostics}
+Promotion remains blocked for two concrete reasons in the challenger comparison:
+\begin{itemize}[leftmargin=1.2em]
+  \item Challenger release profile does not pass.
+  \item Challenger medium-horizon CRPS gain vs incumbent on h9..h12 is 1.64\%, below the 5.0\% promotion threshold.
+\end{itemize}
+
+Short-horizon challenger degradation is controlled (0.42\% worsen on h1..h4, within threshold),
+and boundary comparator conditions pass, so the blocker is model-quality gain rather than governance mechanics.
+
+\subsection{Coverage-fail diagnostics retained}
+Coverage-fail diagnostics identify localized misspecification zones rather than broad instability.
+Current retained diagnostic table highlights fail cells in:
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{hpi\_growth\_yoy}: h5, h6, h11
+  \item \texttt{ust10\_rate}: h3, h4
+\end{itemize}
+
+\subsection{Ablation context retained}
+PD-target ablation artifacts are preserved to document regime/scope tradeoffs.
+The recorded winner in retained artifacts is Champion A with full variable scope,
+while release-like checks on alternative candidates remain non-passing.
+
+\subsection{Next-change priority for future branch work}
+The highest-value single experiment remains challenger \texttt{ust10\_rate} density improvement in bucket Q5--Q12.
+Target outcome is to reduce challenger width pressure while lifting medium-horizon CRPS gain,
+so promotion thresholds can be approached without loosening governance.
+
+\section{Shippable outputs in frozen V3}
+\subsection{Canonical PD handoff}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{outputs/macro\_engine/pd\_regressors\_forecast\_levels.csv}
+  \item \texttt{outputs/macro\_engine/pd\_regressors\_forecast\_derived.csv}
+  \item \texttt{outputs/macro\_engine/pd\_regressors\_metadata.json}
+\end{itemize}
+
+\subsection{Governance and diagnostics}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{outputs/macro\_engine/validation/validation\_summary.json}
+  \item \texttt{outputs/macro\_engine/validation/backtest\_metrics.csv}
+  \item \texttt{outputs/macro\_engine/validation/calibration\_factors.json}
+  \item \texttt{outputs/macro\_engine/validation/pd\_ablation\_results.csv}
+  \item \texttt{outputs/macro\_engine/champion\_map.json}
+\end{itemize}
+
+\subsection{Legacy baseline table retained}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{outputs/macro\_engine/bvar\_oos\_backtest\_table.csv}
+\end{itemize}
+
+\subsection{Validation artifact retention policy in frozen package}
+The frozen V3 package keeps both final-result validation artifacts and extended diagnostics.
+Core files (\texttt{validation\_summary}, \texttt{backtest\_metrics}, \texttt{calibration\_factors},
+\texttt{pd\_ablation\_results}) support the headline release decision.
+Extended files (boundary culprits, coverage fail cells, DM table, seed registry,
+scenario checks, and assumption/regime rerun folders) are retained for deeper audit trails.
+
+\section{Limitations and next-work boundary}
+\begin{itemize}[leftmargin=1.2em]
+  \item This package uses revised-history macro data, not real-time vintage data. Forecast quality under true real-time information sets may differ.
+  \item Promotion remains blocked. Challenger regime does not yet meet replacement criteria, mainly because medium-horizon density improvement is insufficient.
+  \item The primary validation focus is the three PD level targets. This is intentional for handoff quality, but it does not imply all secondary macro variables are equally optimized.
+  \item Calibration improves coverage behavior but introduces model-risk tradeoffs in width. Width controls are enforced, but further refinement may still improve sharpness efficiency.
+  \item Scenario design remains rule-based and assumption-driven in long horizon. It is not a structural macroeconomic simulator and should be interpreted as disciplined scenario path generation.
+  \item Derived PD deltas are convenience outputs only. Final PD feature policy, transformations, and segmentation remain the responsibility of the downstream PD modeling layer.
+  \item This freeze captures one validated snapshot in time. Re-estimation on new data vintages may alter champion choices and gate outcomes.
+\end{itemize}
+
+\section{Freeze statement}
+V3 is designated as the stable fallback baseline for this repository.
+It is intended for reproducible reruns, controlled handoff, and governance traceability when experimental branches (V4+) are under active change.
+Version progression should therefore follow a branch-and-compare workflow:
+retain V3 unchanged for baseline reference, and evaluate all new modeling ideas in V4+ against this frozen benchmark before any future promotion.
+
+\end{document}

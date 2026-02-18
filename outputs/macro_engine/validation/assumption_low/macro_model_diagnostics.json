@@ -1,7 +1,7 @@
 {
   "contract_version": "v4.1",
   "regime_id": "champion_a",
-  "assumption_set": "base",
+  "assumption_set": "low",
   "data_rows_used": 116,
   "var_benchmark": {
     "lag_order": 2,

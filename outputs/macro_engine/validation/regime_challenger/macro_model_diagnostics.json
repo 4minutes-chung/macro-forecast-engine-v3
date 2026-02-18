@@ -1,6 +1,6 @@
 {
   "contract_version": "v4.1",
-  "regime_id": "champion_a",
+  "regime_id": "champion_b",
   "assumption_set": "base",
   "data_rows_used": 116,
   "var_benchmark": {
@@ -35,9 +35,9 @@
     }
   },
   "regime": {
-    "short_quarters": 12,
-    "medium_quarters": 24,
-    "long_start_quarter": 25,
+    "short_quarters": 16,
+    "medium_quarters": 28,
+    "long_start_quarter": 29,
     "total_quarters": 80
   },
   "validation": {

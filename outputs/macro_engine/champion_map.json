@@ -1,0 +1,842 @@
+{
+  "contract_version": "v3.freeze.1",
+  "regime_id": "champion_a",
+  "variables": {
+    "unemployment_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 11.92248803263801,
+        "coverage90_bucket": 0.9204545454545454,
+        "width_ratio_bucket": 1.1398332804776299,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 31.653897542540154,
+        "coverage90_bucket": 0.8636363636363636,
+        "width_ratio_bucket": 1.1370763630163199,
+        "calibration_scale": 1.205,
+        "coverage90_before": 0.8721590909090909,
+        "coverage90_after_est": 0.8863636363636364,
+        "calibration_samples": 352,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "labor_force_participation": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 10.525328106463931,
+        "coverage90_bucket": 0.8295454545454546,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 6.370580366374733,
+        "coverage90_bucket": 0.6647727272727273,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "payroll_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 18.70874540863811,
+        "coverage90_bucket": 0.8522727272727273,
+        "width_ratio_bucket": 0.9309980241983259,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 25.166229974027935,
+        "coverage90_bucket": 0.7869318181818182,
+        "width_ratio_bucket": 0.8931889155955378,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "wage_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.20521434460441,
+        "coverage90_bucket": 0.9204545454545454,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 18.14336226931411,
+        "coverage90_bucket": 0.8551136363636364,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "headline_cpi_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.861527099634737,
+        "coverage90_bucket": 0.8693181818181819,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.508335925186664,
+        "coverage90_bucket": 0.7215909090909092,
+        "width_ratio_bucket": 0.5679102473369998,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "core_cpi_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 20.588232930936403,
+        "coverage90_bucket": 0.8011363636363636,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 6.357046389044662,
+        "coverage90_bucket": 0.7386363636363636,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "pce_inflation_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 11.24732162413692,
+        "coverage90_bucket": 0.8863636363636364,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.92890457306385,
+        "coverage90_bucket": 0.7159090909090909,
+        "width_ratio_bucket": 0.6010214115266662,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "oer_inflation_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 13.664945870590298,
+        "coverage90_bucket": 0.875,
+        "width_ratio_bucket": 0.9979671696367372,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 2.2009501522626542,
+        "coverage90_bucket": 0.7926136363636364,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "medical_cpi_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 7.488551815072246,
+        "coverage90_bucket": 0.6193181818181819,
+        "width_ratio_bucket": 0.9628633777375197,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 4.684716473608391,
+        "coverage90_bucket": 0.6164772727272727,
+        "width_ratio_bucket": 1.046683959968391,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "real_gdp_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 20.15257082927423,
+        "coverage90_bucket": 0.8920454545454546,
+        "width_ratio_bucket": 1.158894409947327,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 10.278539950878308,
+        "coverage90_bucket": 0.8465909090909092,
+        "width_ratio_bucket": 0.6912375736507982,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "industrial_production_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 0.8490673657223022,
+        "coverage90_bucket": 0.875,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 20.761315882818593,
+        "coverage90_bucket": 0.9034090909090908,
+        "width_ratio_bucket": 0.7675057179268197,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "consumer_sentiment": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 1.4399222761719606,
+        "coverage90_bucket": 0.8806818181818181,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 2.0723351757757023,
+        "coverage90_bucket": 0.7840909090909091,
+        "width_ratio_bucket": 0.7993331086840028,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "retail_sales_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 8.528223799586742,
+        "coverage90_bucket": 0.8920454545454546,
+        "width_ratio_bucket": 1.186379881247624,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 13.242468835482699,
+        "coverage90_bucket": 0.8181818181818182,
+        "width_ratio_bucket": 0.6298888181312214,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "hpi_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 14.84596366346331,
+        "coverage90_bucket": 0.8693181818181819,
+        "width_ratio_bucket": 1.2552067181685826,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 8.294099907053267,
+        "coverage90_bucket": 0.8238636363636364,
+        "width_ratio_bucket": 1.6384368967913823,
+        "calibration_scale": 0.9,
+        "coverage90_before": 0.8210227272727273,
+        "coverage90_after_est": 0.8096590909090909,
+        "calibration_samples": 352,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "housing_starts_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 7.085671630153103,
+        "coverage90_bucket": 0.8295454545454546,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 26.154928176415396,
+        "coverage90_bucket": 0.9460227272727273,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "building_permits_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 6.424709881137801,
+        "coverage90_bucket": 0.8352272727272727,
+        "width_ratio_bucket": 0.9431175958328588,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 27.24848912384111,
+        "coverage90_bucket": 0.9488636363636364,
+        "width_ratio_bucket": 0.7398357966821287,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "months_supply_homes": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 0.34249612254353323,
+        "coverage90_bucket": 0.8181818181818182,
+        "width_ratio_bucket": 1.0691006624038666,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 5.310758464033364,
+        "coverage90_bucket": 0.8551136363636364,
+        "width_ratio_bucket": 1.0936879508508286,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "rent_inflation_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 2.573510473091169,
+        "coverage90_bucket": 0.8011363636363636,
+        "width_ratio_bucket": 0.9405222612277082,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "BVAR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 11.191802713379648,
+        "coverage90_bucket": 0.6903409090909091,
+        "width_ratio_bucket": 0.9358878316711853,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "mortgage30_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 0.3988832985656261,
+        "coverage90_bucket": 0.8409090909090909,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 4.130196795276782,
+        "coverage90_bucket": 0.7301136363636364,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "ust10_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 1.7557287399597112,
+        "coverage90_bucket": 0.8295454545454546,
+        "width_ratio_bucket": 0.9659860431883468,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 5.493978225259227,
+        "coverage90_bucket": 0.7073863636363636,
+        "width_ratio_bucket": 0.8746522325891293,
+        "calibration_scale": 1.55,
+        "coverage90_before": 0.7215909090909091,
+        "coverage90_after_est": 0.9005681818181818,
+        "calibration_samples": 352,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "high_yield_spread": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "log_floor_eps",
+        "scoring_domain": "level",
+        "top2_gap_pct": 10.386530693046318,
+        "coverage90_bucket": 0.9659090909090909,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "log_floor_eps",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.839745567019733,
+        "coverage90_bucket": 0.9914772727272727,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "prime_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.439613562393344,
+        "coverage90_bucket": 0.8920454545454546,
+        "width_ratio_bucket": 1.026414417012279,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.666449479515157,
+        "coverage90_bucket": 0.8238636363636364,
+        "width_ratio_bucket": 1.4438624110728793,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "fed_funds_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 8.060930029115418,
+        "coverage90_bucket": 0.8977272727272727,
+        "width_ratio_bucket": 1.08499212650504,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 7.733117286938606,
+        "coverage90_bucket": 0.8352272727272727,
+        "width_ratio_bucket": 1.4384711065446314,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "household_credit_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 5.5694099178451,
+        "coverage90_bucket": 0.8977272727272727,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 10.499180752623868,
+        "coverage90_bucket": 0.7755681818181818,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "household_networth_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 10.969558668152777,
+        "coverage90_bucket": 0.8579545454545454,
+        "width_ratio_bucket": 0.8619347899999249,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 25.35933432513491,
+        "coverage90_bucket": 0.8522727272727273,
+        "width_ratio_bucket": 0.6919170052651175,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "consumer_delinquency_rate": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 22.20331971141356,
+        "coverage90_bucket": 0.9431818181818182,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 29.051962441034345,
+        "coverage90_bucket": 0.8664772727272727,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "working_age_pop_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.184848827532043,
+        "coverage90_bucket": 0.9147727272727273,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 14.480575239637627,
+        "coverage90_bucket": 0.9261363636363636,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    },
+    "population_growth_yoy": {
+      "bucket_1_4": {
+        "kind": "single",
+        "model": "AR",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 8.737059775909408,
+        "coverage90_bucket": 0.6477272727272727,
+        "width_ratio_bucket": 0.9916004941915899,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      },
+      "bucket_5_12": {
+        "kind": "single",
+        "model": "RW",
+        "transform_id": "level",
+        "scoring_domain": "level",
+        "top2_gap_pct": 9.917564752745713,
+        "coverage90_bucket": 0.32386363636363635,
+        "width_ratio_bucket": 1.0,
+        "calibration_scale": 1.0,
+        "coverage90_before": null,
+        "coverage90_after_est": null,
+        "calibration_samples": 0,
+        "calibration_method": "none"
+      }
+    }
+  }
+}

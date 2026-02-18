@@ -1,0 +1,10 @@
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+
+# local-only large sample (kept on disk, not pushed)
+sampled_PD_data_10pct.csv

@@ -3,12 +3,31 @@
     "model_panel_csv": "data/macro_panel_quarterly_model.csv"
   },
   "horizons": {
-    "short_quarters": 8,
-    "medium_quarters": 20,
-    "long_start_quarter": 21,
+    "short_quarters": 12,
+    "medium_quarters": 24,
+    "long_start_quarter": 25,
     "total_quarters": 80
   },
+  "regime_candidates": {
+    "champion_a": {
+      "short_quarters": 12,
+      "medium_quarters": 24,
+      "long_start_quarter": 25
+    },
+    "champion_b": {
+      "short_quarters": 16,
+      "medium_quarters": 28,
+      "long_start_quarter": 29
+    },
+    "single_stage_h12_no_bridge": {
+      "short_quarters": 12,
+      "medium_quarters": 12,
+      "long_start_quarter": 13,
+      "no_bridge": true
+    }
+  },
   "model": {
+    "active_regime": "champion_a",
     "variables": [
       "unemployment_rate",
       "labor_force_participation",
@@ -53,6 +72,18 @@
       "consumer_delinquency_rate",
       "working_age_pop_growth_yoy"
     ],
+    "pd_core_variables": [
+      "unemployment_rate",
+      "ust10_rate",
+      "hpi_growth_yoy",
+      "fed_funds_rate",
+      "core_cpi_yoy",
+      "high_yield_spread"
+    ],
+    "bvar_scope_candidates": [
+      "full_28",
+      "pd_core_6"
+    ],
     "level_variable_flags": {
       "unemployment_rate": true,
       "labor_force_participation": true,
@@ -65,8 +96,14 @@
       "fed_funds_rate": true,
       "consumer_delinquency_rate": true
     },
-    "lag_candidates": [2, 3, 4, 5, 6],
-    "short_horizon_model": "BVAR",
+    "lag_candidates": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "short_horizon_model": "CHAMPION",
     "interval_simulations": 600,
     "random_seed": 42,
     "bvar_hyperparams": {
@@ -76,26 +113,74 @@
       "lambda4": 5.0
     }
   },
-  "assumptions": {
-    "working_age_pop_growth_yoy": 0.4,
-    "population_growth_yoy": 0.6,
-    "labor_productivity_trend_yoy": 1.2,
-    "nairu": 4.2,
-    "inflation_target": 2.1,
-    "neutral_real_rate": 0.8,
-    "term_premium_10y": 1.2,
-    "mortgage_spread_30y": 1.7,
-    "hy_spread_anchor": 3.8,
-    "housing_supply_elasticity_drag": 0.5
+  "assumption_sets": {
+    "low": {
+      "nairu": 3.8,
+      "inflation_target": 1.8,
+      "neutral_real_rate": 0.4,
+      "term_premium_10y": 0.8,
+      "labor_productivity_trend_yoy": 0.8,
+      "working_age_pop_growth_yoy": 0.1,
+      "population_growth_yoy": 0.3
+    },
+    "base": {
+      "nairu": 4.2,
+      "inflation_target": 2.1,
+      "neutral_real_rate": 0.8,
+      "term_premium_10y": 1.2,
+      "labor_productivity_trend_yoy": 1.2,
+      "working_age_pop_growth_yoy": 0.4,
+      "population_growth_yoy": 0.6
+    },
+    "high": {
+      "nairu": 4.8,
+      "inflation_target": 2.4,
+      "neutral_real_rate": 1.2,
+      "term_premium_10y": 1.8,
+      "labor_productivity_trend_yoy": 1.6,
+      "working_age_pop_growth_yoy": 0.7,
+      "population_growth_yoy": 0.9
+    }
+  },
+  "long_run_regime_params": {
+    "hy_spread_long_run_median": 3.8,
+    "hy_spread_tail_q90": 5.0,
+    "housing_supply_elasticity_drag": 0.5,
+    "mortgage_spread_30y": 1.7
   },
   "scenarios": {
     "Mild_Adverse": {
       "shock_profiles": {
-        "unemployment_rate": { "start_q": 21, "peak_q": 28, "end_q": 52, "peak_delta": 2.5 },
-        "hpi_growth_yoy": { "start_q": 21, "peak_q": 30, "end_q": 50, "peak_delta": -3.0 },
-        "mortgage30_rate": { "start_q": 21, "peak_q": 26, "end_q": 46, "peak_delta": 1.0 },
-        "real_gdp_growth_yoy": { "start_q": 21, "peak_q": 28, "end_q": 44, "peak_delta": -1.5 },
-        "high_yield_spread": { "start_q": 21, "peak_q": 27, "end_q": 45, "peak_delta": 2.0 }
+        "unemployment_rate": {
+          "start_q": 25,
+          "peak_q": 32,
+          "end_q": 52,
+          "peak_delta": 2.5
+        },
+        "hpi_growth_yoy": {
+          "start_q": 25,
+          "peak_q": 34,
+          "end_q": 54,
+          "peak_delta": -3.0
+        },
+        "mortgage30_rate": {
+          "start_q": 25,
+          "peak_q": 30,
+          "end_q": 46,
+          "peak_delta": 1.0
+        },
+        "real_gdp_growth_yoy": {
+          "start_q": 25,
+          "peak_q": 32,
+          "end_q": 46,
+          "peak_delta": -1.5
+        },
+        "high_yield_spread": {
+          "start_q": 25,
+          "peak_q": 31,
+          "end_q": 48,
+          "peak_delta": 2.0
+        }
       },
       "persistent_anchor_shift": {
         "hpi_growth_yoy": -0.2
@@ -103,12 +188,42 @@
     },
     "Severe_Adverse": {
       "shock_profiles": {
-        "unemployment_rate": { "start_q": 21, "peak_q": 32, "end_q": 64, "peak_delta": 5.5 },
-        "hpi_growth_yoy": { "start_q": 21, "peak_q": 33, "end_q": 64, "peak_delta": -7.0 },
-        "mortgage30_rate": { "start_q": 21, "peak_q": 27, "end_q": 52, "peak_delta": 2.0 },
-        "real_gdp_growth_yoy": { "start_q": 21, "peak_q": 30, "end_q": 56, "peak_delta": -3.0 },
-        "high_yield_spread": { "start_q": 21, "peak_q": 30, "end_q": 56, "peak_delta": 4.0 },
-        "consumer_delinquency_rate": { "start_q": 21, "peak_q": 32, "end_q": 60, "peak_delta": 1.5 }
+        "unemployment_rate": {
+          "start_q": 25,
+          "peak_q": 36,
+          "end_q": 64,
+          "peak_delta": 5.5
+        },
+        "hpi_growth_yoy": {
+          "start_q": 25,
+          "peak_q": 37,
+          "end_q": 64,
+          "peak_delta": -7.0
+        },
+        "mortgage30_rate": {
+          "start_q": 25,
+          "peak_q": 31,
+          "end_q": 52,
+          "peak_delta": 2.0
+        },
+        "real_gdp_growth_yoy": {
+          "start_q": 25,
+          "peak_q": 34,
+          "end_q": 56,
+          "peak_delta": -3.0
+        },
+        "high_yield_spread": {
+          "start_q": 25,
+          "peak_q": 34,
+          "end_q": 56,
+          "peak_delta": 4.0
+        },
+        "consumer_delinquency_rate": {
+          "start_q": 25,
+          "peak_q": 36,
+          "end_q": 60,
+          "peak_delta": 1.5
+        }
       },
       "persistent_anchor_shift": {
         "hpi_growth_yoy": -0.4,
@@ -126,7 +241,179 @@
       }
     }
   },
+  "validation": {
+    "contract_version": "v3.freeze.1",
+    "objective_mode_default": "pd_levels_primary",
+    "pd_level_targets": [
+      "unemployment_rate",
+      "ust10_rate",
+      "hpi_yoy"
+    ],
+    "pd_source_mapping": {
+      "hpi_yoy": "hpi_growth_yoy"
+    },
+    "pd_targets_mode_default": "pd_owner_canonical",
+    "pd_convenience_targets_enabled": true,
+    "pd_delta_defaults": {
+      "du_6m": {
+        "lag_quarters": 2
+      },
+      "d10y_6m": {
+        "lag_quarters": 2
+      }
+    },
+    "pd_delta_overrides": {},
+    "pd_required_cells_definition": "pd_level_targets_x_h1_12",
+    "pd_required_cells_power_rule": "min_cell_n_oos_gte_40",
+    "pd_gate_horizons": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "key_vars_primary": [
+      "unemployment_rate",
+      "real_gdp_growth_yoy",
+      "headline_cpi_yoy",
+      "core_cpi_yoy",
+      "fed_funds_rate",
+      "ust10_rate",
+      "mortgage30_rate",
+      "hpi_growth_yoy",
+      "consumer_delinquency_rate"
+    ],
+    "key_vars_special": [
+      "high_yield_spread",
+      "housing_starts_yoy"
+    ],
+    "coverage90_passrate_min": 0.75,
+    "coverage90_passrate_aggregation": "cell_var_h",
+    "required_cells_definition": "key_vars_primary_x_h1_12",
+    "required_cells_power_rule": "min_cell_n_oos_gte_40",
+    "width_ratio_baseline": "rw",
+    "width_ratio_mean_max": 1.35,
+    "width_ratio_per_var_max": 1.6,
+    "coverage90_band": [
+      0.8,
+      0.98
+    ],
+    "scoring_draws": 200,
+    "ar_p_candidates": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "ensemble_gap_pct": 1.5,
+    "ensemble_temperature": 0.2,
+    "crps_rw_epsilon": 1e-08,
+    "gate_mode_default": "warn",
+    "strict_mode_default": false,
+    "min_oos_origins_required": 40,
+    "preferred_oos_origins": 60,
+    "min_train": 60,
+    "max_origins": 0,
+    "origin_stride": 1,
+    "dm": {
+      "enabled": true,
+      "gate_role": "supporting_only",
+      "hac_lag_rule": "h-1",
+      "hln_small_sample": true
+    },
+    "scoring_domain_default": "level",
+    "active_profile_default": "release",
+    "strict_profile_default": "release",
+    "threshold_profiles": {
+      "operational": {
+        "coverage90_passrate_min": 0.65,
+        "rrmse_h1_h2_max": 1.02,
+        "rrmse_h3_h4_max": 1.0,
+        "crps_gain_h5_h12_min": 1.5,
+        "width_ratio_mean_max": 1.5,
+        "width_ratio_per_var_max": 1.8,
+        "boundary_median_z_max": 2.0,
+        "boundary_max_z_max": 4.0
+      },
+      "release": {
+        "coverage90_passrate_min": 0.75,
+        "rrmse_h1_h2_max": 1.0,
+        "rrmse_h3_h4_max": 0.98,
+        "crps_gain_h5_h12_min": 3.0,
+        "width_ratio_mean_max": 1.35,
+        "width_ratio_per_var_max": 1.6,
+        "boundary_median_z_max": 1.5,
+        "boundary_max_z_max": 2.5
+      },
+      "promotion": {
+        "crps_gain_h9_h12_min": 5.0,
+        "short_horizon_crps_worsen_h1_h4_max": 1.0,
+        "boundary_median_delta_max": 0.15
+      }
+    },
+    "pd_calibration": {
+      "enabled": true,
+      "target_coverage90": 0.9,
+      "apply_to_buckets": [
+        "bucket_5_12"
+      ],
+      "min_samples_per_bucket": 100,
+      "low_sample_fallback": "target_global_shrink_to_1",
+      "low_sample_shrinkage_weight": 0.5,
+      "objective_lambda_width_penalty": 2.0,
+      "per_target": {
+        "unemployment_rate": {
+          "scale_min": 0.8,
+          "scale_max": 1.7,
+          "width_cap": 1.6
+        },
+        "ust10_rate": {
+          "scale_min": 0.8,
+          "scale_max": 1.8,
+          "width_cap": 1.7
+        },
+        "hpi_yoy": {
+          "scale_min": 0.8,
+          "scale_max": 1.4,
+          "width_cap": 1.45
+        }
+      }
+    },
+    "calibration": {
+      "enabled": true,
+      "target_coverage90": 0.9,
+      "scale_min": 0.7,
+      "scale_max": 2.0,
+      "apply_to_buckets": [
+        "bucket_1_4",
+        "bucket_5_12"
+      ],
+      "min_samples_per_bucket": 200
+    },
+    "boundary": {
+      "diagnostic_output": true,
+      "force_continuity_short_to_bridge": true,
+      "max_z_release": 2.5
+    }
+  },
   "outputs": {
+    "pd_export": {
+      "levels_file": "outputs/macro_engine/pd_regressors_forecast_levels.csv",
+      "derived_file": "outputs/macro_engine/pd_regressors_forecast_derived.csv",
+      "metadata_file": "outputs/macro_engine/pd_regressors_metadata.json",
+      "canonical_file": "levels"
+    },
     "irf_horizon_quarters": 20,
     "irf_shocks": {
       "mortgage30_rate": 1.0,

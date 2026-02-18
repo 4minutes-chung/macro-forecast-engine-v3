@@ -1,0 +1,46 @@
+{
+  "contract_version": "v4.1",
+  "run_timestamp_utc": "2026-02-18T00:35:55.284555+00:00",
+  "data_vintage_date": "2025-09-30",
+  "scenario_set": [
+    "Baseline",
+    "Mild_Adverse",
+    "Severe_Adverse",
+    "Demographic_LowGrowth"
+  ],
+  "canonical_file": "levels",
+  "levels_file": "pd_regressors_forecast_levels.csv",
+  "derived_file": "pd_regressors_forecast_derived.csv",
+  "units": {
+    "unemployment_rate": "percent",
+    "ust10_rate": "percent",
+    "hpi_yoy": "percent_yoy",
+    "du_6m": "percentage_points_6m",
+    "d10y_6m": "percentage_points_6m"
+  },
+  "definitions": {
+    "hpi_yoy": "hpi_growth_yoy",
+    "du_6m": "unemployment_rate_t - unemployment_rate_(t-lag_q)",
+    "d10y_6m": "ust10_rate_t - ust10_rate_(t-lag_q)",
+    "hpi_measure": "yoy growth"
+  },
+  "lag_overrides_used": {
+    "du_6m": 2,
+    "d10y_6m": 2
+  },
+  "calibration_applied": true,
+  "calibration_scale_references": {
+    "unemployment_rate": {
+      "bucket_1_4": 1.0,
+      "bucket_5_12": 1.205
+    },
+    "ust10_rate": {
+      "bucket_1_4": 1.0,
+      "bucket_5_12": 1.55
+    },
+    "hpi_growth_yoy": {
+      "bucket_1_4": 1.0,
+      "bucket_5_12": 0.9
+    }
+  }
+}

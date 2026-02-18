@@ -1,0 +1,87 @@
+{
+  "contract_version": "v3.freeze.1",
+  "incumbent_regime": "champion_a",
+  "challenger_regime": "champion_b",
+  "incumbent_factors": {
+    "hpi_growth_yoy": {
+      "bucket_5_12": {
+        "calibration_scale": 0.9,
+        "coverage90_before": 0.8210227272727273,
+        "coverage90_after_est": 0.8096590909090909,
+        "calibration_samples": 352,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 1.6221411339509304,
+        "projected_width_ratio_after": 1.4599270205558375,
+        "width_cap": 1.45,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "unemployment_rate": {
+      "bucket_5_12": {
+        "calibration_scale": 1.205,
+        "coverage90_before": 0.8721590909090909,
+        "coverage90_after_est": 0.8863636363636364,
+        "calibration_samples": 352,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 1.3441203400680086,
+        "projected_width_ratio_after": 1.6196650097819505,
+        "width_cap": 1.6,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "ust10_rate": {
+      "bucket_5_12": {
+        "calibration_scale": 1.55,
+        "coverage90_before": 0.7215909090909091,
+        "coverage90_after_est": 0.9005681818181818,
+        "calibration_samples": 352,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 0.8797485676237732,
+        "projected_width_ratio_after": 1.3636102798168486,
+        "width_cap": 1.7,
+        "calibration_method": "bucket_objective"
+      }
+    }
+  },
+  "challenger_proxy_factors": {
+    "hpi_growth_yoy": {
+      "bucket_5_12": {
+        "calibration_scale": 0.9,
+        "coverage90_before": 0.828125,
+        "coverage90_after_est": 0.81875,
+        "calibration_samples": 320,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 1.6371804998026669,
+        "projected_width_ratio_after": 1.4734624498224003,
+        "width_cap": 1.45,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "unemployment_rate": {
+      "bucket_5_12": {
+        "calibration_scale": 1.07,
+        "coverage90_before": 0.884375,
+        "coverage90_after_est": 0.890625,
+        "calibration_samples": 320,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 1.4235775293816293,
+        "projected_width_ratio_after": 1.5232279564383435,
+        "width_cap": 1.6,
+        "calibration_method": "bucket_objective"
+      }
+    },
+    "ust10_rate": {
+      "bucket_5_12": {
+        "calibration_scale": 1.0,
+        "coverage90_before": 0.846875,
+        "coverage90_after_est": 0.846875,
+        "calibration_samples": 320,
+        "target_coverage90": 0.9,
+        "base_width_ratio": 1.7806381459862237,
+        "projected_width_ratio_after": 1.7806381459862237,
+        "width_cap": 1.7,
+        "calibration_method": "bucket_objective"
+      }
+    }
+  }
+}

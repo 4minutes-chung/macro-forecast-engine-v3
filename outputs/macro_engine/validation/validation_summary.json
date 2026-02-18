@@ -1,0 +1,492 @@
+{
+  "contract_version": "v3.freeze.1",
+  "objective_mode": "pd_levels_primary",
+  "validation_mode": "warn",
+  "active_profile": "release",
+  "strict_profile": "release",
+  "diagnostic_only": false,
+  "regimes": {
+    "incumbent": "champion_a",
+    "challenger": "champion_b"
+  },
+  "pd_ablation_winner": {
+    "regime_id": "champion_a",
+    "scope": "full_28",
+    "status": "ok",
+    "n_cells": 36,
+    "min_n_oos": 44,
+    "median_rrmse_h1_h2": 1.0265520917012239,
+    "median_rrmse_h3_h4": 0.9155430746356893,
+    "mean_crps_gain_pct_h5_h12": 9.460230640635112,
+    "coverage90_passrate": 0.8055555555555556,
+    "width_ratio_mean": 1.4955112759474876,
+    "width_ratio_per_var_max": 1.8337480065674165,
+    "release_like_pass": false
+  },
+  "seed_registry_hash": "b0f79f86a4fe2d5f",
+  "validation_incumbent": {
+    "pass_active_profile": true,
+    "profile_results": {
+      "operational": {
+        "pass": true,
+        "profile": "operational",
+        "thresholds": {
+          "coverage90_passrate_min": 0.65,
+          "rrmse_h1_h2_max": 1.02,
+          "rrmse_h3_h4_max": 1.0,
+          "crps_gain_h5_h12_min": 1.5,
+          "width_ratio_mean_max": 1.5,
+          "width_ratio_per_var_max": 1.8,
+          "boundary_median_z_max": 2.0,
+          "boundary_max_z_max": 4.0
+        },
+        "required_cells_definition": "pd_level_targets_x_h1_12",
+        "required_cells_count": 36,
+        "min_n_oos_required_cells": 44,
+        "power_pass": true,
+        "median_rrmse_h1_h2": 0.9744179004936702,
+        "median_rrmse_h3_h4": 0.9207600414153378,
+        "mean_crps_gain_pct_h5_h12": 15.130355401822206,
+        "h1_h2_pass": true,
+        "h3_h4_pass": true,
+        "crps_gain_pass": true,
+        "coverage90_band": [
+          0.8,
+          0.98
+        ],
+        "coverage90_passrate": 0.8611111111111112,
+        "coverage90_pass": true,
+        "width_ratio_mean": 1.306887601328298,
+        "width_ratio_mean_pass": true,
+        "width_ratio_per_var": {
+          "hpi_yoy": 1.4014643774643571,
+          "unemployment_rate": 1.2933957717823203,
+          "ust10_rate": 1.2258026547382157
+        },
+        "width_ratio_per_var_pass": true,
+        "boundary": {
+          "combined": {
+            "max_z": 0.03499904302577166,
+            "median_z": 0.0011902315947759498,
+            "n": 6
+          },
+          "short": {
+            "max_z": 0.0,
+            "median_z": 0.0,
+            "n": 3
+          },
+          "medium": {
+            "max_z": 0.03499904302577166,
+            "median_z": 0.00895443022915633,
+            "n": 3
+          }
+        },
+        "boundary_pass": true,
+        "scenario": {
+          "timing_pass": true,
+          "timing_violations": [],
+          "ordering_pass": true,
+          "ordering_violations": []
+        },
+        "scenario_pass": true
+      },
+      "release": {
+        "pass": true,
+        "profile": "release",
+        "thresholds": {
+          "coverage90_passrate_min": 0.75,
+          "rrmse_h1_h2_max": 1.0,
+          "rrmse_h3_h4_max": 0.98,
+          "crps_gain_h5_h12_min": 3.0,
+          "width_ratio_mean_max": 1.35,
+          "width_ratio_per_var_max": 1.6,
+          "boundary_median_z_max": 1.5,
+          "boundary_max_z_max": 2.5
+        },
+        "required_cells_definition": "pd_level_targets_x_h1_12",
+        "required_cells_count": 36,
+        "min_n_oos_required_cells": 44,
+        "power_pass": true,
+        "median_rrmse_h1_h2": 0.9744179004936702,
+        "median_rrmse_h3_h4": 0.9207600414153378,
+        "mean_crps_gain_pct_h5_h12": 15.130355401822206,
+        "h1_h2_pass": true,
+        "h3_h4_pass": true,
+        "crps_gain_pass": true,
+        "coverage90_band": [
+          0.8,
+          0.98
+        ],
+        "coverage90_passrate": 0.8611111111111112,
+        "coverage90_pass": true,
+        "width_ratio_mean": 1.306887601328298,
+        "width_ratio_mean_pass": true,
+        "width_ratio_per_var": {
+          "hpi_yoy": 1.4014643774643571,
+          "unemployment_rate": 1.2933957717823203,
+          "ust10_rate": 1.2258026547382157
+        },
+        "width_ratio_per_var_pass": true,
+        "boundary": {
+          "combined": {
+            "max_z": 0.03499904302577166,
+            "median_z": 0.0011902315947759498,
+            "n": 6
+          },
+          "short": {
+            "max_z": 0.0,
+            "median_z": 0.0,
+            "n": 3
+          },
+          "medium": {
+            "max_z": 0.03499904302577166,
+            "median_z": 0.00895443022915633,
+            "n": 3
+          }
+        },
+        "boundary_pass": true,
+        "scenario": {
+          "timing_pass": true,
+          "timing_violations": [],
+          "ordering_pass": true,
+          "ordering_violations": []
+        },
+        "scenario_pass": true
+      }
+    },
+    "boundary_short_stats": {
+      "max_z": 0.0,
+      "median_z": 0.0,
+      "n": 3
+    },
+    "boundary_medium_stats": {
+      "max_z": 0.03499904302577166,
+      "median_z": 0.00895443022915633,
+      "n": 3
+    },
+    "boundary_combined_stats": {
+      "max_z": 0.03499904302577166,
+      "median_z": 0.0011902315947759498,
+      "n": 6
+    },
+    "scenario": {
+      "timing_pass": true,
+      "timing_violations": [],
+      "ordering_pass": true,
+      "ordering_violations": []
+    }
+  },
+  "validation_challenger_proxy": {
+    "pass_active_profile": false,
+    "profile_results": {
+      "operational": {
+        "pass": false,
+        "profile": "operational",
+        "thresholds": {
+          "coverage90_passrate_min": 0.65,
+          "rrmse_h1_h2_max": 1.02,
+          "rrmse_h3_h4_max": 1.0,
+          "crps_gain_h5_h12_min": 1.5,
+          "width_ratio_mean_max": 1.5,
+          "width_ratio_per_var_max": 1.8,
+          "boundary_median_z_max": 2.0,
+          "boundary_max_z_max": 4.0
+        },
+        "required_cells_definition": "pd_level_targets_x_h1_12",
+        "required_cells_count": 36,
+        "min_n_oos_required_cells": 40,
+        "power_pass": true,
+        "median_rrmse_h1_h2": 1.0103215801105256,
+        "median_rrmse_h3_h4": 0.9732891693650998,
+        "mean_crps_gain_pct_h5_h12": 2.814966113955942,
+        "h1_h2_pass": true,
+        "h3_h4_pass": true,
+        "crps_gain_pass": true,
+        "coverage90_band": [
+          0.8,
+          0.98
+        ],
+        "coverage90_passrate": 0.9444444444444444,
+        "coverage90_pass": true,
+        "width_ratio_mean": 1.528523310258445,
+        "width_ratio_mean_pass": false,
+        "width_ratio_per_var": {
+          "hpi_yoy": 1.420573625216184,
+          "unemployment_rate": 1.2803221763207293,
+          "ust10_rate": 1.8846741292384213
+        },
+        "width_ratio_per_var_pass": false,
+        "boundary": {
+          "combined": {
+            "max_z": 0.03709006467257568,
+            "median_z": 0.0014728569673421038,
+            "n": 6
+          },
+          "short": {
+            "max_z": 0.0,
+            "median_z": 0.0,
+            "n": 3
+          },
+          "medium": {
+            "max_z": 0.03709006467257568,
+            "median_z": 0.006409194662968358,
+            "n": 3
+          }
+        },
+        "boundary_pass": true,
+        "scenario": {
+          "timing_pass": true,
+          "timing_violations": [],
+          "ordering_pass": true,
+          "ordering_violations": []
+        },
+        "scenario_pass": true
+      },
+      "release": {
+        "pass": false,
+        "profile": "release",
+        "thresholds": {
+          "coverage90_passrate_min": 0.75,
+          "rrmse_h1_h2_max": 1.0,
+          "rrmse_h3_h4_max": 0.98,
+          "crps_gain_h5_h12_min": 3.0,
+          "width_ratio_mean_max": 1.35,
+          "width_ratio_per_var_max": 1.6,
+          "boundary_median_z_max": 1.5,
+          "boundary_max_z_max": 2.5
+        },
+        "required_cells_definition": "pd_level_targets_x_h1_12",
+        "required_cells_count": 36,
+        "min_n_oos_required_cells": 40,
+        "power_pass": true,
+        "median_rrmse_h1_h2": 1.0103215801105256,
+        "median_rrmse_h3_h4": 0.9732891693650998,
+        "mean_crps_gain_pct_h5_h12": 2.814966113955942,
+        "h1_h2_pass": false,
+        "h3_h4_pass": true,
+        "crps_gain_pass": false,
+        "coverage90_band": [
+          0.8,
+          0.98
+        ],
+        "coverage90_passrate": 0.9444444444444444,
+        "coverage90_pass": true,
+        "width_ratio_mean": 1.528523310258445,
+        "width_ratio_mean_pass": false,
+        "width_ratio_per_var": {
+          "hpi_yoy": 1.420573625216184,
+          "unemployment_rate": 1.2803221763207293,
+          "ust10_rate": 1.8846741292384213
+        },
+        "width_ratio_per_var_pass": false,
+        "boundary": {
+          "combined": {
+            "max_z": 0.03709006467257568,
+            "median_z": 0.0014728569673421038,
+            "n": 6
+          },
+          "short": {
+            "max_z": 0.0,
+            "median_z": 0.0,
+            "n": 3
+          },
+          "medium": {
+            "max_z": 0.03709006467257568,
+            "median_z": 0.006409194662968358,
+            "n": 3
+          }
+        },
+        "boundary_pass": true,
+        "scenario": {
+          "timing_pass": true,
+          "timing_violations": [],
+          "ordering_pass": true,
+          "ordering_violations": []
+        },
+        "scenario_pass": true
+      }
+    },
+    "boundary_short_stats": {
+      "max_z": 0.0,
+      "median_z": 0.0,
+      "n": 3
+    },
+    "boundary_medium_stats": {
+      "max_z": 0.03709006467257568,
+      "median_z": 0.006409194662968358,
+      "n": 3
+    },
+    "boundary_combined_stats": {
+      "max_z": 0.03709006467257568,
+      "median_z": 0.0014728569673421038,
+      "n": 6
+    }
+  },
+  "profile_results": {
+    "operational": {
+      "pass": true,
+      "profile": "operational",
+      "thresholds": {
+        "coverage90_passrate_min": 0.65,
+        "rrmse_h1_h2_max": 1.02,
+        "rrmse_h3_h4_max": 1.0,
+        "crps_gain_h5_h12_min": 1.5,
+        "width_ratio_mean_max": 1.5,
+        "width_ratio_per_var_max": 1.8,
+        "boundary_median_z_max": 2.0,
+        "boundary_max_z_max": 4.0
+      },
+      "required_cells_definition": "pd_level_targets_x_h1_12",
+      "required_cells_count": 36,
+      "min_n_oos_required_cells": 44,
+      "power_pass": true,
+      "median_rrmse_h1_h2": 0.9744179004936702,
+      "median_rrmse_h3_h4": 0.9207600414153378,
+      "mean_crps_gain_pct_h5_h12": 15.130355401822206,
+      "h1_h2_pass": true,
+      "h3_h4_pass": true,
+      "crps_gain_pass": true,
+      "coverage90_band": [
+        0.8,
+        0.98
+      ],
+      "coverage90_passrate": 0.8611111111111112,
+      "coverage90_pass": true,
+      "width_ratio_mean": 1.306887601328298,
+      "width_ratio_mean_pass": true,
+      "width_ratio_per_var": {
+        "hpi_yoy": 1.4014643774643571,
+        "unemployment_rate": 1.2933957717823203,
+        "ust10_rate": 1.2258026547382157
+      },
+      "width_ratio_per_var_pass": true,
+      "boundary": {
+        "combined": {
+          "max_z": 0.03499904302577166,
+          "median_z": 0.0011902315947759498,
+          "n": 6
+        },
+        "short": {
+          "max_z": 0.0,
+          "median_z": 0.0,
+          "n": 3
+        },
+        "medium": {
+          "max_z": 0.03499904302577166,
+          "median_z": 0.00895443022915633,
+          "n": 3
+        }
+      },
+      "boundary_pass": true,
+      "scenario": {
+        "timing_pass": true,
+        "timing_violations": [],
+        "ordering_pass": true,
+        "ordering_violations": []
+      },
+      "scenario_pass": true
+    },
+    "release": {
+      "pass": true,
+      "profile": "release",
+      "thresholds": {
+        "coverage90_passrate_min": 0.75,
+        "rrmse_h1_h2_max": 1.0,
+        "rrmse_h3_h4_max": 0.98,
+        "crps_gain_h5_h12_min": 3.0,
+        "width_ratio_mean_max": 1.35,
+        "width_ratio_per_var_max": 1.6,
+        "boundary_median_z_max": 1.5,
+        "boundary_max_z_max": 2.5
+      },
+      "required_cells_definition": "pd_level_targets_x_h1_12",
+      "required_cells_count": 36,
+      "min_n_oos_required_cells": 44,
+      "power_pass": true,
+      "median_rrmse_h1_h2": 0.9744179004936702,
+      "median_rrmse_h3_h4": 0.9207600414153378,
+      "mean_crps_gain_pct_h5_h12": 15.130355401822206,
+      "h1_h2_pass": true,
+      "h3_h4_pass": true,
+      "crps_gain_pass": true,
+      "coverage90_band": [
+        0.8,
+        0.98
+      ],
+      "coverage90_passrate": 0.8611111111111112,
+      "coverage90_pass": true,
+      "width_ratio_mean": 1.306887601328298,
+      "width_ratio_mean_pass": true,
+      "width_ratio_per_var": {
+        "hpi_yoy": 1.4014643774643571,
+        "unemployment_rate": 1.2933957717823203,
+        "ust10_rate": 1.2258026547382157
+      },
+      "width_ratio_per_var_pass": true,
+      "boundary": {
+        "combined": {
+          "max_z": 0.03499904302577166,
+          "median_z": 0.0011902315947759498,
+          "n": 6
+        },
+        "short": {
+          "max_z": 0.0,
+          "median_z": 0.0,
+          "n": 3
+        },
+        "medium": {
+          "max_z": 0.03499904302577166,
+          "median_z": 0.00895443022915633,
+          "n": 3
+        }
+      },
+      "boundary_pass": true,
+      "scenario": {
+        "timing_pass": true,
+        "timing_violations": [],
+        "ordering_pass": true,
+        "ordering_violations": []
+      },
+      "scenario_pass": true
+    },
+    "promotion": {
+      "promotion_pass": false,
+      "thresholds": {
+        "crps_gain_h9_h12_min": 5.0,
+        "short_horizon_crps_worsen_h1_h4_max": 1.0,
+        "boundary_median_delta_max": 0.15
+      },
+      "incumbent_release_pass": true,
+      "challenger_release_pass": false,
+      "power_h9_h12_min_n_oos": 40,
+      "power_pass": true,
+      "crps_gain_pct_h9_h12_challenger_vs_incumbent": 1.6426386150198768,
+      "short_horizon_crps_worsen_pct_h1_h4": 0.42065672383702624,
+      "boundary_comparator_pass": true,
+      "incumbent_median_z": 0.0011902315947759498,
+      "challenger_median_z": 0.0014728569673421038
+    }
+  },
+  "promotion": {
+    "promotion_pass": false,
+    "thresholds": {
+      "crps_gain_h9_h12_min": 5.0,
+      "short_horizon_crps_worsen_h1_h4_max": 1.0,
+      "boundary_median_delta_max": 0.15
+    },
+    "incumbent_release_pass": true,
+    "challenger_release_pass": false,
+    "power_h9_h12_min_n_oos": 40,
+    "power_pass": true,
+    "crps_gain_pct_h9_h12_challenger_vs_incumbent": 1.6426386150198768,
+    "short_horizon_crps_worsen_pct_h1_h4": 0.42065672383702624,
+    "boundary_comparator_pass": true,
+    "incumbent_median_z": 0.0011902315947759498,
+    "challenger_median_z": 0.0014728569673421038
+  },
+  "notes": [
+    "DM statistics are diagnostic-only and excluded from pass/fail.",
+    "Special-series variables are excluded from promotion gate by contract.",
+    "Operational profile is reporting-only in V3 freeze; release and promotion are gating profiles."
+  ]
+}
