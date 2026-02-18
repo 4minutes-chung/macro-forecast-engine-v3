@@ -1,4 +1,4 @@
-# Macro Engine Schema (V3 Freeze)
+# Macro Engine Schema v3
 
 ## 1) Core Forecast Table
 File: `outputs/macro_engine/macro_forecast_paths.csv`
@@ -61,7 +61,7 @@ File: `outputs/macro_engine/pd_regressors_forecast_derived.csv`
 | `d10y_6m` | numeric | percentage points | Convenience delta (default lag 2 quarters). |
 | `hpi_yoy` | numeric | percent | Included for downstream convenience. |
 
-## 4) Validation Evidence Files Kept In Frozen V3
+## 4) Validation Evidence Files
 Directory: `outputs/macro_engine/validation/`
 
 Core final-result files:
@@ -75,6 +75,3 @@ Extended diagnostics retained for audit:
 - `scenario_timing_checks.csv`, `special_series_sweep.csv`, `anchor_sensitivity.csv`, `regime_split_scores.csv`
 - nested subfolders for assumption-set and regime-specific reruns
 
-## 5) Notes
-- Full model and governance narrative is in `macro_engine_plain_report_v3.pdf`.
-- Transform definitions and validation thresholds are in `macro_engine_config.json`.
