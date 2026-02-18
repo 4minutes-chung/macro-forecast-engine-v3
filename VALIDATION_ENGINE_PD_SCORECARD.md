@@ -1,4 +1,4 @@
-# PD-Focused Validation Scorecard (Engine)
+# PD-Focused Validation Scorecard
 
 ## Snapshot and Version
 - Package folders covered: `/Users/stevenchung/Desktop/P12B_File/Macro risk v3` and `/Users/stevenchung/Desktop/P12B_File/Macro risk v4`
@@ -83,9 +83,9 @@ Success criteria for this one change:
 | `champion_b` | `pd_core_6` | 40 | 1.0017 | 1.0188 | -10.97% | 0.2778 | 0.9068 | False |
 
 ## Artifacts used
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/validation/validation_summary.json`
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/validation/backtest_metrics.csv`
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/validation/calibration_factors.json`
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/validation/coverage_fail_cells.csv`
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/validation/pd_ablation_results.csv`
-- `/Users/stevenchung/Desktop/P12B_File/Macro risk v3/outputs/macro_engine/champion_map.json`
+- `outputs/macro_engine/validation/validation_summary.json`
+- `outputs/macro_engine/validation/backtest_metrics.csv`
+- `outputs/macro_engine/validation/calibration_factors.json`
+- `outputs/macro_engine/validation/coverage_fail_cells.csv`
+- `outputs/macro_engine/validation/pd_ablation_results.csv`
+- `outputs/macro_engine/champion_map.json`
